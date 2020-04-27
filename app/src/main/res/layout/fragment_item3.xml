@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ItemFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/ll_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:text="推荐"
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                android:background="@drawable/shape_green"/>
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:text="生活"
+                android:textSize="15sp"
+                android:textColor="#88000000"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_gray"/>
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:text="学生"
+                android:textSize="15sp"
+                android:textColor="#88000000"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_gray"/>
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:text="科技"
+                android:textSize="15sp"
+                android:textColor="#88000000"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_gray"/>
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:text="自律"
+                android:textSize="15sp"
+                android:textColor="#88000000"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_gray"/>
+        </LinearLayout>
+
+        <ListView
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/ll_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lv_list"/>
+
+    </RelativeLayout>
+
+</ScrollView>

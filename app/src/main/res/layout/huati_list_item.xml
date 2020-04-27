@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"/>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="13dp"
+        android:textColor="#000"
+        android:text="我是标题"/>
+
+    <TextView
+        android:id="@+id/tv_weiguan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="13dp"
+        android:text="19.9万人围观>"/>
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_below="@id/tv_title"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:maxLines="2"
+        android:textColor="#88000000"
+        android:text="《三体》都没看过？你就OUT啦！"/>
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/tv_content"
+        android:textColor="#000"
+        android:layout_marginTop="10dp"
+        android:text=" @茶叶店 等134位用户参与"/>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_comment"
+        android:layout_below="@id/tv_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:text="2020/4/27"/>
+</RelativeLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ItemFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_hrcy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:text="火热参与"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingTop="8dp"
+            android:textSize="15sp"
+            android:text="更多"/>
+
+        <GridView
+            android:id="@+id/gv_list"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:layout_below="@id/tv_hrcy"
+            android:numColumns="3" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_below="@id/gv_list"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="#A9A9A9"/>
+
+        <TextView
+            android:id="@+id/tv_zzry"
+            android:layout_below="@id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:text="正在热议"
+            android:textSize="16sp" />
+
+        <ListView
+            android:id="@+id/lv_list"
+            android:layout_below="@id/tv_zzry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_below="@id/lv_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"
+            android:textColor="#A9A9A9"
+            android:text="查看更多议题 >"/>
+
+    </RelativeLayout>
+
+</ScrollView>

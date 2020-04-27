@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_top"
+            android:layout_width="match_parent"
+            android:layout_height="260dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:background="@drawable/title_book" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentBottom="true">
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/shape_white"
+                    android:textSize="30sp"
+                    android:hint="Search places" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp">
+                    <ImageButton
+                        android:id="@+id/ib_search"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/search" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_henikouwei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:text="合你口味"
+                android:textColor="#000"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingTop="8dp"
+                android:textSize="15sp"
+                android:text="查看全部"/>
+
+            <GridView
+                android:id="@+id/gv_list"
+                android:layout_width="match_parent"
+                android:layout_height="420dp"
+                android:layout_below="@id/tv_henikouwei"
+                android:numColumns="3" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:text="主编力荐"
+                android:textColor="#000"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:paddingTop="30dp"
+                android:id="@+id/iv_pic"
+                android:layout_width="100dp"
+                android:layout_height="130dp"
+                android:layout_below="@+id/tv_top"
+                android:background="@drawable/bookpic"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_top"
+                android:layout_toRightOf="@id/iv_pic"
+                android:maxLines="1"
+                android:paddingLeft="10dp"
+                android:text="下第后上永崇高侍郎"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title"
+                android:layout_toRightOf="@id/iv_pic"
+                android:maxLines="2"
+                android:paddingLeft="10dp"
+                android:text="天上碧桃和露种，日边红杏倚云栽。芙蓉生在秋江上，不向东风怨未开。" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_content"
+                android:layout_toRightOf="@id/iv_pic"
+                android:paddingLeft="10dp"
+                android:text="28分16秒" />
+
+            <Button
+                android:id="@+id/btn_knowmore"
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shape_white"
+                android:text="了解"
+                android:textColor="@color/red" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/xinshushangjia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:text="新书上架"
+                android:textColor="#000"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingTop="8dp"
+                android:textSize="15sp"
+                android:text="查看全部"/>
+
+            <GridView
+                android:id="@+id/gv_list2"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:layout_below="@id/xinshushangjia"
+                android:numColumns="3" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

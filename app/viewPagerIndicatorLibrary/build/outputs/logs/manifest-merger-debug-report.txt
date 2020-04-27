@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml:3:1-6:12
+INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml:3:1-6:12
+INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml:3:1-6:12
+	package
+		ADDED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml:4:5-37
+		INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml:3:11-69
+uses-sdk
+INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidStudioProjects\ZHBJ\viewPagerIndicatorLibrary\src\main\AndroidManifest.xml

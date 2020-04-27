@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <RadioGroup
+        android:id="@+id/rg_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:checked="true"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/tab_home_selector"
+            android:textColor="@drawable/txt_tab_selector"
+            android:text="主页"/>
+
+        <RadioButton
+            android:id="@+id/rb_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/tab_circle_selector"
+            android:textColor="@drawable/txt_tab_selector"
+            android:text="书圈"/>
+        <RadioButton
+            android:id="@+id/rb_fri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/tab_fri_selector"
+            android:textColor="@drawable/txt_tab_selector"
+            android:text="好友"/>
+        <RadioButton
+            android:id="@+id/rb_mine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+            android:textColor="@drawable/txt_tab_selector"
+            android:drawableTop="@drawable/tab_mine_selector"
+            android:text="我的"/>
+
+    </RadioGroup>
+</LinearLayout>
