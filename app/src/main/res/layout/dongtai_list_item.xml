@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/ib_touxiang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_point"
+        android:src="@drawable/pxj2"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_toRightOf="@id/ib_touxiang"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="13dp"
+        android:textColor="#000"
+        android:text="蜻蜓队长"/>
+
+    <TextView
+        android:id="@+id/tv_weiguan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="-3dp"
+        android:text="2天前"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_below="@id/tv_title"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:maxLines="2"
+        android:textColor="#88000000"
+        android:text="《三体》都没看过？你就OUT啦！"/>
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/tv_content"
+        android:textColor="#000"
+        android:layout_marginTop="10dp"
+        android:text=" △ 1"/>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_comment"
+        android:layout_below="@id/tv_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:text="评论"/>
+</RelativeLayout>

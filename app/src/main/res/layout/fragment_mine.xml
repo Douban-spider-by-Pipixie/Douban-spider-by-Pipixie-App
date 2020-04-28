@@ -1,20 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frag4"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
     android:background="#ffffff"
     tools:context=".BaseFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="我的"
-        android:textSize="200px" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:background="@drawable/bg" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/shape_green"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:layout_marginTop="190dp"
+            android:layout_toRightOf="@id/ll_mine"
+            android:layout_marginLeft="100dp"
+            android:text="编辑个人资料"/>
+
+        <LinearLayout
+            android:id="@+id/ll_mine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="155dp"
+            android:layout_marginLeft="20dp">
+
+            <ImageButton
+                android:id="@+id/ib_touxiang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_point"
+                android:src="@drawable/pxj"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ib_touxiang"
+                android:text="蜻蜓队长"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#000"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_fans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_mine"
+            android:text="1,102"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#87CEEB"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_mine"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:layout_toRightOf="@id/tv_fans"
+            android:text="粉丝"/>
+
+        <TextView
+            android:id="@+id/tv_guanzhu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_mine"
+            android:text="9"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="200dp"
+            android:textColor="#87CEEB"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_mine"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:layout_toRightOf="@id/tv_guanzhu"
+            android:text="关注"/>
+
+        <View
+            android:id="@+id/view"
+            android:layout_below="@id/tv_fans"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="10dp"
+            android:background="#A9A9A9"/>
+
+        <ImageView
+            android:id="@+id/iv_keshihua"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="280dp"
+            android:layout_below="@id/view"
+            android:background="@drawable/keshihua"/>
+        <View
+            android:id="@+id/view2"
+            android:layout_below="@id/iv_keshihua"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="10dp"
+            android:background="#A9A9A9"/>
+
+
+        <ListView
+            android:id="@+id/lv_list"
+            android:layout_below="@id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+
+</ScrollView>

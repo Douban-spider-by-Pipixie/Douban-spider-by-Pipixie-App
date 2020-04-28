@@ -69,6 +69,7 @@ dimen default_title_indicator_text_size
 dimen default_title_indicator_title_padding
 dimen default_title_indicator_top_padding
 drawable news_tab_item_bg_select
+drawable news_tab_item_bg_select_black
 drawable vpi__tab_indicator
 drawable vpi__tab_selected_focused_holo
 drawable vpi__tab_selected_holo
