@@ -1,6 +1,5 @@
 package cn.itcast.ppx;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -13,10 +12,28 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.BitmapUtils;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
 
 public class HomeFragment extends Fragment {
 
-    private GridView mGridView;
+    private List<BooksTab> mBooksTabs;
+    private BooksTab mBooksTab;
+    private BitmapUtils mBitmapUtils;
+
+    private GridView mGridView1;
     private GridView mGridView2;
 
 
@@ -36,25 +53,58 @@ public class HomeFragment extends Fragment {
 
         View view=inflater.inflate(R.layout.fragment_home, container, false);
 
-        mGridView=(GridView)view.findViewById(R.id.gv_list);
+        mGridView1=(GridView)view.findViewById(R.id.gv_list);
         mGridView2=(GridView)view.findViewById(R.id.gv_list2);
-        MyBaseAdapter1 mAdapter=new MyBaseAdapter1();
-        MyBaseAdapter2 mAdapter2=new MyBaseAdapter2();
-        mGridView.setAdapter(mAdapter);
-        mGridView2.setAdapter(mAdapter2);
+        getDataFromServer();
         return view;
+    }
+
+
+    private void getDataFromServer(){
+        HttpUtils utils=new HttpUtils();
+        utils.send(HttpRequest.HttpMethod.GET, "http://106.52.239.252:9988/paramTest?test=randomBook",
+                new RequestCallBack<String>() {
+
+                    @Override
+                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                        String result=responseInfo.result;
+                        System.out.println("服务器数据:"+result);
+                        if(result==null){
+                            Toast.makeText(getContext(),"解析失败",Toast.LENGTH_SHORT).show();
+                        }else{
+                            processData(result);
+                            MyBaseAdapter1 myBaseAdapter1=new MyBaseAdapter1();
+                            MyBaseAdapter2 myBaseAdapter2=new MyBaseAdapter2();
+
+                            mGridView1.setAdapter(myBaseAdapter1);
+                            mGridView2.setAdapter(myBaseAdapter2);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(HttpException error, String msg) {
+                        error.printStackTrace();
+                        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    protected void processData(String json){
+        mBooksTabs=JsonParse.getBooksTab(json);
+        System.out.println("解析的结果："+mBooksTabs);
     }
 
     class MyBaseAdapter1 extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return names.length;
+            return 5;
         }
 
         @Override
         public Object getItem(int position) {
-            return names[position];
+            return null;
         }
 
         @Override
@@ -71,18 +121,26 @@ public class HomeFragment extends Fragment {
                 convertView=View.inflate(getContext(),R.layout.list_item_photo,null);
                 holder=new ViewHolder();
                 holder.mTexTView=convertView.findViewById(R.id.tv_title);
+                holder.mDate=convertView.findViewById(R.id.tv_time);
                 holder.imageView=convertView.findViewById(R.id.iv_pic);
+                mBooksTab=mBooksTabs.get(position);
                 convertView.setTag(holder);
             }else {
                 holder=(ViewHolder) convertView.getTag();
             }
-            holder.mTexTView.setText(names[position]);
-            holder.imageView.setBackgroundResource(icons[position]);
+            holder.mTexTView.setText(mBooksTab.getName());
+            holder.mDate.setText(mBooksTab.getDate());
+            //holder.imageView.setBackgroundResource(icons[position]);
+            mBitmapUtils=new BitmapUtils(getActivity());
+            String topimage=mBooksTab.getImg();//图片的下载链接
+            holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);//设置缩放模式，图片宽高匹配
+            mBitmapUtils.display(holder.imageView,topimage);
             return convertView;
         }
          class ViewHolder{
             TextView mTexTView;
             ImageView imageView;
+            TextView mDate;
         }
     }
 

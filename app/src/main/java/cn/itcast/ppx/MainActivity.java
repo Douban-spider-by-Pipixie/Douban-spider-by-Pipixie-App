@@ -49,6 +49,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
     }
 
+
+
     @Override
     public void onClick(View v) {
         String username=et_username.getText().toString().trim();
@@ -70,4 +72,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         Intent intent=new Intent(getApplicationContext(),BaseFragment.class);
         startActivity(intent);
     }
+
+
 }

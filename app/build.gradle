@@ -6,6 +6,7 @@ android {
 
     defaultConfig {
         applicationId "cn.itcast.ppx"
+        useLibrary 'org.apache.http.legacy'
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
@@ -33,4 +34,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':viewPagerIndicatorLibrary')
     implementation files('libs/xUtils-2.6.14.jar')
+    implementation files('libs\\mysql-connector-java-5.1.39-bin.jar')
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation files('libs\\servlet-api.jar')
 }
