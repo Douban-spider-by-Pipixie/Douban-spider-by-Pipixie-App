@@ -17,8 +17,9 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
-        <activity android:name=".UserRegister"></activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".ItemFragment3" />
+        <activity android:name=".UserRegister" />
         <activity android:name=".ItemFragment2" />
         <activity android:name=".ItemFragment" />
         <activity
@@ -26,7 +27,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
-            android:name=".MainActivity"
+            android:name=".UserLogin"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
