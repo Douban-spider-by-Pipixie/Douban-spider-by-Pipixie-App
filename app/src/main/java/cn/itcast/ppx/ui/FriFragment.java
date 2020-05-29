@@ -1,4 +1,4 @@
-package cn.itcast.ppx;
+package cn.itcast.ppx.ui;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import cn.itcast.ppx.R;
 
 public class FriFragment extends Fragment {
 

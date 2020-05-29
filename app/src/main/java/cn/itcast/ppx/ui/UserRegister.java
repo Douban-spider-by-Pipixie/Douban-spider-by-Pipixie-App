@@ -1,9 +1,7 @@
-package cn.itcast.ppx;
+package cn.itcast.ppx.ui;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -11,15 +9,14 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -30,44 +27,30 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cn.itcast.ppx.im.ECApplication;
+import cn.itcast.ppx.R;
 
-public class UserLogin extends AppCompatActivity {
+public class UserRegister extends AppCompatActivity {
 
-    String TAG = UserLogin.class.getCanonicalName();
+    String TAG = UserRegister.class.getCanonicalName();
 
     private EditText et_data_uname;
-    private EditText et_data_upass;
-    private CheckBox cb_isSave;
-    private RelativeLayout rl_activity_login;
-    private SharedPreferences sp;
+    private EditText et_data_upass1;
+    private EditText et_data_upass2;
+    private RelativeLayout rl_activity_register;
     private HashMap<String, String> stringHashMap;
 
     @SuppressLint("ClickableViewAccessibility")
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(EMClient.getInstance().isLoggedInBefore()){
-            Log.d("TAG","已经登录过");
-            startActivity(new Intent(UserLogin.this,BaseFragment.class));
-        }
-        setContentView(R.layout.activity_login);
-        et_data_uname = (EditText) findViewById(R.id.et_username);
-        et_data_upass = (EditText) findViewById(R.id.et_password);
-        rl_activity_login=(RelativeLayout)findViewById(R.id.rl_activity_login);
-        cb_isSave=(CheckBox) findViewById(R.id.cb_isSave);
-        sp=getSharedPreferences("info",MODE_PRIVATE);
+        setContentView(R.layout.activity_register);
+        et_data_uname = (EditText) findViewById(R.id.et_registeractivity_username);
+        et_data_upass1 = (EditText) findViewById(R.id.et_registeractivity_password1);
+        et_data_upass2 = (EditText) findViewById(R.id.et_registeractivity_password2);
+        rl_activity_register=(RelativeLayout)findViewById(R.id.rl_activity_register);
         stringHashMap = new HashMap<>();
 
-        boolean isSave=sp.getBoolean("isChecked",false);
-        if(isSave) {
-            String username = sp.getString("username", "");
-            String pwd = sp.getString("pwd", "");
-            et_data_uname.setText(username);
-            et_data_upass.setText(pwd);
-            cb_isSave.setChecked(true);
-        }
-
-        rl_activity_login.setOnTouchListener(new View.OnTouchListener() {
+        rl_activity_register.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 return imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -75,25 +58,23 @@ public class UserLogin extends AppCompatActivity {
         });
     }
 
-    public void LoginGET(View view) {
+    public void RegisterGET(View view) {
         stringHashMap.put("name", et_data_uname.getText().toString());
-        stringHashMap.put("password", et_data_upass.getText().toString());
+        stringHashMap.put("password", et_data_upass1.getText().toString());
         new Thread(getRun).start();
     }
 
-    public void Register(View view) {
+    public void LoginPage(View view) {
         Timer time = new Timer();
         TimerTask tk = new TimerTask() {
-            Intent intent = new Intent(UserLogin.this, UserRegister.class);
+            Intent intent = new Intent(UserRegister.this, UserLogin.class);
             @Override
             public void run() {
                 startActivity(intent);
                 finish();
             }
-        };time.schedule(tk,1000);
+        };time.schedule(tk,500);
     }
-
-
 
     /**
      * get请求线程
@@ -107,6 +88,7 @@ public class UserLogin extends AppCompatActivity {
         }
     };
 
+
     /**
      * get提交数据
      *
@@ -114,8 +96,8 @@ public class UserLogin extends AppCompatActivity {
      */
     private void requestGet(HashMap<String, String> paramsMap) {
         try {
-            if(!TextUtils.isEmpty(et_data_uname.getText().toString())&&!TextUtils.isEmpty(et_data_upass.getText().toString())){
-                String baseUrl = "http://106.52.239.252:9988/login?";
+            if((et_data_upass1.getText().toString().equals(et_data_upass2.getText().toString()))&&!TextUtils.isEmpty(et_data_uname.getText().toString())&&!TextUtils.isEmpty(et_data_upass1.getText().toString())){
+                String baseUrl = "http://106.52.239.252:9988/reg?";
                 StringBuilder tempParams = new StringBuilder();
                 int pos = 0;
                 for (String key : paramsMap.keySet()) {
@@ -152,69 +134,66 @@ public class UserLogin extends AppCompatActivity {
                     // 获取返回的数据
                     String result = streamToString(urlConn.getInputStream());
                     Log.e(TAG, "Get方式请求成功，result--->" + result);
-                    Looper.prepare();
-                    if(result.contains("Login failed!")){
-                        Toast.makeText(this,"用户名不存在，请先注册",Toast.LENGTH_LONG).show();
-                    }else{
-                        EMClient.getInstance().login(et_data_uname.getText().toString().trim(), et_data_upass.getText().toString().trim(), new EMCallBack() {
-                            @Override
-                            public void onSuccess() {
-                                Timer time = new Timer();
-                                TimerTask tk = new TimerTask() {
-                                    Intent intent = new Intent(UserLogin.this, BaseFragment.class);
-                                    @Override
-                                    public void run() {
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                };time.schedule(tk,1000);
-                                Log.e("ppx","登陆成功");
-                            }
-
-                            @Override
-                            public void onError(int i, String s) {
-                                Log.e("ppx","登陆失败"+i+","+s);
-                            }
-
-                            @Override
-                            public void onProgress(int i, String s) {
-
-                            }
-                        });
-                        Toast.makeText(this,"登录成功",Toast.LENGTH_LONG).show();
-                        //CacheUtils.setCache(getApplicationContext(),"http://106.52.239.252:9988/test?p=getbook","result");
-                        SharedPreferences.Editor editor=sp.edit();
-                        boolean checked= cb_isSave.isChecked();
-                        if(checked){
-                            //通过sp对象获取编辑器
-                            editor.putString("username",et_data_uname.getText().toString().trim());
-                            editor.putString("pwd",et_data_upass.getText().toString().trim());
+                    if(result.contentEquals("true")){
+                        try{
+                            EMClient.getInstance().createAccount(et_data_uname.getText().toString().trim(),et_data_upass1.getText().toString().trim());
+                            Log.e("ppx","注册成功");
+                        }catch (HyphenateException e){
+                            e.printStackTrace();
+                            Log.e("ppx","注册失败"+e.getErrorCode()+","+e.getMessage());
                         }
-                        editor.putBoolean("isChecked",checked);
-                        //提交
-                        editor.commit();
+                        Looper.prepare();
+                        Toast.makeText(this,"注册成功",Toast.LENGTH_LONG).show();
+                        Timer time = new Timer();
+                        TimerTask tk = new TimerTask() {
+                            Intent intent = new Intent(UserRegister.this, UserLogin.class);
+                            @Override
+                            public void run() {
+                                startActivity(intent);
+                                finish();
+                            }
+                        };time.schedule(tk,2000);
+                        Looper.loop();
+                    }else{
+                        Looper.prepare();
+                        Toast.makeText(this,"账号已被注册",Toast.LENGTH_LONG).show();
+                        Looper.loop();
                     }
-                    Looper.loop();
+                } else {
+                    Looper.prepare();
+                    Toast.makeText(this,"网络出现错误",Toast.LENGTH_LONG).show();
+                    Looper.prepare();
+                    Log.e(TAG, "Get方式请求失败");
                 }
                 // 关闭连接
                 urlConn.disconnect();
+            }else if((!et_data_upass1.getText().toString().equals(et_data_upass2.getText().toString()))&&!TextUtils.isEmpty(et_data_uname.getText().toString())){
+                Looper.prepare();
+                Toast.makeText(this,"输入密码不一致，请重新输入",Toast.LENGTH_LONG).show();
+                Looper.loop();
             }else if(TextUtils.isEmpty(et_data_uname.getText().toString())){
                 Looper.prepare();
                 Toast.makeText(this,"请输入用户名",Toast.LENGTH_LONG).show();
                 Looper.loop();
-            }else if(!TextUtils.isEmpty(et_data_uname.getText().toString())&&TextUtils.isEmpty(et_data_upass.getText().toString())){
+            }else if(TextUtils.isEmpty(et_data_upass1.getText().toString())&&!TextUtils.isEmpty(et_data_uname.getText().toString())) {
                 Looper.prepare();
-                Toast.makeText(this,"请输入密码",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "请输入密码", Toast.LENGTH_LONG).show();
+                Looper.loop();
+            }else if(TextUtils.isEmpty(et_data_upass2.getText().toString())&&!TextUtils.isEmpty(et_data_uname.getText().toString())&&!TextUtils.isEmpty(et_data_upass1.getText().toString())) {
+                Looper.prepare();
+                Toast.makeText(this, "请再次输入密码", Toast.LENGTH_LONG).show();
                 Looper.loop();
             }else{
                 Looper.prepare();
-                Toast.makeText(this,"未知错误",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "未知错误", Toast.LENGTH_LONG).show();
                 Looper.loop();
             }
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
     }
+
+
 
     /**
      * 将输入流转换成字符串
@@ -239,6 +218,4 @@ public class UserLogin extends AppCompatActivity {
             return null;
         }
     }
-
-
 }

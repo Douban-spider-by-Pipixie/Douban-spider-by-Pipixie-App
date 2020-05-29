@@ -1,101 +1,44 @@
-package cn.itcast.ppx;
+package cn.itcast.ppx.item;
 
-import android.content.Intent;
+import androidx.fragment.app.Fragment;
+
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
+import cn.itcast.ppx.R;
 
-public class MineFragment extends Fragment {
-
+public class ItemFragment2 extends Fragment {
 
     private ListView mListView;
 
-    private Button mExit;
+    private String[] titles={"上海","北京","产品经理","产品经理","产品经理"};
 
-    public MineFragment(){
-
-    }
+    private String[] contents={"一个月了还没找到合适的工作","今年的北京怎么了，从来没有这么难过，职位少，面试更少，石沉大海，你们呢？","在拉勾做产品时说明样子的体验？","热议|你在街道说明需求时瞬间想打人？","热议|你在街道说明需求时瞬间想打人？"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_mine, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_item2, container, false);
 
         mListView=(ListView) view.findViewById(R.id.lv_list);
-        mExit=(Button)view.findViewById(R.id.btn_logout);
-        mExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout(true, new EMCallBack() {
-                    @Override
-                    public void onSuccess() {
-                        startActivity(new Intent(getContext(),UserLogin.class));
-                    }
 
-                    @Override
-                    public void onError(int i, String s) {
-
-                    }
-
-                    @Override
-                    public void onProgress(int i, String s) {
-
-                    }
-                });
-            }
-        });
         MyAdapter myAdapter=new MyAdapter();
 
         mListView.setAdapter(myAdapter);
 
         setListViewHeightBasedOnChildren(mListView);
+
         return view;
     }
-
-
-
-
-    public void logout(boolean unbindDeviceToken, final EMCallBack callback){
-        EMClient.getInstance().logout(unbindDeviceToken, new EMCallBack(){
-            @Override
-            public void onSuccess() {
-                Log.d("TAG", "logout: onSuccess");
-                if (callback != null) {
-                    callback.onSuccess();
-                }
-            }
-
-            @Override
-            public void onError(int i, String s) {
-                Log.d("TAG", "logout: onSuccess");
-                if (callback != null) {
-                    callback.onError(i, s);
-                }
-            }
-
-            @Override
-            public void onProgress(int i, String s) {
-                if (callback != null) {
-                    callback.onProgress(i, s);
-                }
-            }
-        });
-    }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -106,12 +49,12 @@ public class MineFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 5;
+            return titles.length;
         }
 
         @Override
         public Object getItem(int position) {
-            return position;
+            return titles[position];
         }
 
         @Override
@@ -123,12 +66,19 @@ public class MineFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView=View.inflate(getContext(),R.layout.dongtai_list_item,null);
+                convertView=View.inflate(getContext(),R.layout.guanzhu_list_item,null);
                 holder=new ViewHolder();
+                holder.mTitle=convertView.findViewById(R.id.tv_title);
+                holder.mContent=convertView.findViewById(R.id.tv_content);
                 convertView.setTag(holder);
             }else {
                 holder=(ViewHolder) convertView.getTag();
             }
+            holder.mTitle.setText(titles[position]);
+            holder.mContent.setText(contents[position]);
+            holder.mTitle.setTextColor(Color.BLACK);
+            holder.mContent.setTextColor(Color.BLACK);
+            holder.mContent.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             return convertView;
         }
     }
@@ -159,5 +109,4 @@ public class MineFragment extends Fragment {
         // params.height最后得到整个ListView完整显示需要的高度
         listView.setLayoutParams(params);
     }
-
 }

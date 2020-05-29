@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DetailInfo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <include layout="@layout/top"></include>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp">
+
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="130dp"
+            android:layout_height="180dp"
+            android:src="@drawable/book1"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_toRightOf="@id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textColor="#000"
+            android:text="奉送严公入朝十韵"
+            android:maxLines="1"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_toRightOf="@id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:paddingTop="25dp"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:textColor="#000"
+            android:text="[唐代]杜甫"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_toRightOf="@id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_author"
+            android:paddingTop="25dp"
+            android:paddingLeft="10dp"
+            android:text="2020.5.2"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_toRightOf="@id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_date"
+            android:paddingTop="25dp"
+            android:paddingLeft="10dp"
+            android:text="499贝"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:id="@+id/tv_authorIntroduction_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主编推荐语"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/tv_authorIntroduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:layout_below="@id/tv_authorIntroduction_title"
+            android:textSize="16sp"
+            android:text="        扬—维尔纳•米勒（Jan-Werner Müller，1970— ） 普林斯顿大学政治系教授，曾以访问学者的身份任教于纽约大学雷马克研究所和哈佛大学欧洲研究中心，并在牛津大学和剑桥大学分别主讲“卡莱尔讲座”和“丹纳讲座”，长期为《卫报》、《纽约书评》等主流媒体撰稿，是年轻一代政治学者中影响较大的翘楚人物。著有《宪政爱国主义》、《另一个国度：德国知识分子、两德统一及民族认同》、《危险的心灵：战后欧洲思潮中的卡尔•施米特》等。"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:id="@+id/tv_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="内容简介"
+            android:textSize="25sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/tv_bookIntroduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:layout_below="@id/tv_detail_title"
+            android:textSize="16sp"
+            android:text="        一切权力都来自人民。但人民去了哪里？——贝尔托·布莱希特 ★★民粹主义诊断之作：仇视精英、反对多元、垄断人民★★ ☆紧扣国际政治新趋势，教你看懂现代社会的民粹危机☆ ☆民粹主义不仅事关政治，更事关人性的弱点☆ ☆普林斯顿教授精到解读，国内知名政治学者刘擎作序推荐☆ “米 勒这本小书……对澄清“什么是民粹主义”做出了富有启发性的阐 释，并针对当下的政治现象提出许多敏锐而深邃的批判分析。”——刘擎 在过去的几年里，世界见证了玛丽娜•勒庞等民粹主义者的崛起。他们宣扬自己代表真正的普罗大众，借助“平民政治”和“沉默的大多数”等口号，对精英包揽的政治提出了尖锐的批评。可是，到底什么是民粹主义？它真的是对民主的纠错和补充吗？ 在本书中，米勒定义了民粹主义的核心要素：它反对多元主义，垄断对人民的定义，剥夺持反对意见者的人民资格；民粹主义并非民主政治的正当组成部分，而是它挥之不去的永恒阴影。 在米勒看来，危险和误解都源于概念的模糊不清。只有明确了民粹主义的本质，我们才能在民主政治的实践中更好地应对它的挑战"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:id="@+id/tv_mulu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="目录"
+            android:textSize="25sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/tv_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_mulu"
+            android:textSize="16sp"
+            android:text="中译本序言（刘擎）\n 导 论 人人都是民粹主义者吗？\n 第一章 民粹主义者的话语\n 第二章 民粹主义者的行为或掌权的民粹主义者\n 第三章 如何对待民粹主义者\n 结 论 七论民粹主义\n 注 释\n 致 谢\n \n"/>
+
+    </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

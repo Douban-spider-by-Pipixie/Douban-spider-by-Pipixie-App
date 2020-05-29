@@ -1,8 +1,7 @@
-package cn.itcast.ppx;
-
+package cn.itcast.ppx.domain;
 
 //推荐图书网络数据
-public class BooksTab{
+public class BooksTab  {
 
     private String author;
     private String commentCount;
@@ -10,6 +9,9 @@ public class BooksTab{
     private String id;
     private String img;
     private String name;
+    private String price;
+    private String publish;
+    private String star;
 
     public String getName() {
         return name;
@@ -18,10 +20,6 @@ public class BooksTab{
     public void setName(String name) {
         this.name = name;
     }
-
-    private String price;
-    private String publish;
-    private String star;
 
     public String getAuthor() {
         return author;

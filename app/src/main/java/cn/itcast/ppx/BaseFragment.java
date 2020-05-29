@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.RadioButton;
 
+import cn.itcast.ppx.ui.CircleFragment;
+import cn.itcast.ppx.ui.FriFragment;
+import cn.itcast.ppx.ui.HomeFragment;
+import cn.itcast.ppx.ui.MineFragment;
+
 public class BaseFragment extends AppCompatActivity implements View.OnClickListener {
 
     private HomeFragment f1;

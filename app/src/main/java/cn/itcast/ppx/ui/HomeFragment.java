@@ -1,7 +1,8 @@
-package cn.itcast.ppx;
+package cn.itcast.ppx.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -28,8 +30,11 @@ import com.lidroid.xutils.http.client.HttpRequest;
 
 import java.util.List;
 
+import cn.itcast.ppx.domain.BooksTab;
+import cn.itcast.ppx.DetailInfo;
+import cn.itcast.ppx.JsonParse;
+import cn.itcast.ppx.R;
 import cn.itcast.ppx.utils.CacheUtils;
-import cn.itcast.ppx.view.RefreshLishView;
 
 
 public class HomeFragment extends Fragment {
@@ -68,7 +73,6 @@ public class HomeFragment extends Fragment {
         mGridView1=(GridView) view.findViewById(R.id.gv_list);
         mGridView2=(GridView) view.findViewById(R.id.gv_list2);
 
-        //CacheUtils.setCache(getContext(),"http://106.52.239.252:9988/test?p=getbook","result");
 
         String cache=CacheUtils.getCache(getContext(),"http://106.52.239.252:9988/test?p=getbook");
         if(!TextUtils.isEmpty(cache)){
@@ -80,20 +84,14 @@ public class HomeFragment extends Fragment {
         //继续请求服务器数据，保存缓存最新
         getDataFromServer();
 
-        MyBaseAdapter1 myBaseAdapter1=new MyBaseAdapter1();
-        MyBaseAdapter2 myBaseAdapter2=new MyBaseAdapter2();
-
-        mGridView1.setAdapter(myBaseAdapter1);
-        mGridView2.setAdapter(myBaseAdapter2);
         return view;
     }
 
 
     private void getDataFromServer(){
-        HttpUtils utils=new HttpUtils();
-        utils.send(HttpRequest.HttpMethod.GET, "http://106.52.239.252:9988/test?p=getbook",
+        HttpUtils utils_getbook=new HttpUtils();
+        utils_getbook.send(HttpRequest.HttpMethod.GET, "http://106.52.239.252:9988/test?p=getbook",
                 new RequestCallBack<String>() {
-
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         String result=responseInfo.result;
@@ -102,6 +100,28 @@ public class HomeFragment extends Fragment {
                             Toast.makeText(getContext(),"解析失败",Toast.LENGTH_SHORT).show();
                         }else{
                             processData(result);
+
+                            MyBaseAdapter1 myBaseAdapter1=new MyBaseAdapter1();
+                            MyBaseAdapter2 myBaseAdapter2=new MyBaseAdapter2();
+
+                            mGridView1.setAdapter(myBaseAdapter1);
+                            mGridView2.setAdapter(myBaseAdapter2);
+
+                            mGridView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    System.out.println("当前位置"+ position);
+                                    Intent intent=new Intent(getContext(), DetailInfo.class);
+                                    BooksTab booksTab=mBooksTabs.get(position);
+                                    intent.putExtra("Book_Id",booksTab.getId());
+                                    intent.putExtra("Book_Author",booksTab.getAuthor());
+                                    intent.putExtra("Book_Date",booksTab.getDate());
+                                    intent.putExtra("Book_Name",booksTab.getName());
+                                    intent.putExtra("Book_Price",booksTab.getPrice());
+                                    intent.putExtra("Book_Img",booksTab.getImg());
+                                    startActivity(intent);
+                                }
+                            });
                             //Toast.makeText(getContext(),"解析成功",Toast.LENGTH_SHORT).show();
                             //写缓存
                            CacheUtils.setCache(getContext(),"http://106.52.239.252:9988/test?p=getbook",result);
@@ -115,10 +135,11 @@ public class HomeFragment extends Fragment {
                         Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
 
     protected void processData(String json){
-        mBooksTabs=JsonParse.getBooksTab(json);
+        mBooksTabs= JsonParse.getBooksTab(json);
         System.out.println("解析的结果："+mBooksTabs);
     }
 

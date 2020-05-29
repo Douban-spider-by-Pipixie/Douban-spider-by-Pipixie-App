@@ -1,4 +1,4 @@
-package cn.itcast.ppx;
+package cn.itcast.ppx.item;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import cn.itcast.ppx.R;
 
 public class ItemFragment extends Fragment {
 

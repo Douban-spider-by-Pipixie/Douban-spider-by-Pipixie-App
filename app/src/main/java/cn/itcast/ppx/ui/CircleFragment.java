@@ -1,28 +1,27 @@
-package cn.itcast.ppx;
+package cn.itcast.ppx.ui;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.itcast.ppx.item.ItemFragment;
+import cn.itcast.ppx.item.ItemFragment2;
+import cn.itcast.ppx.item.ItemFragment3;
+import cn.itcast.ppx.R;
 
 
 public class CircleFragment extends Fragment {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/rl_activity_login"
     android:background="@drawable/book_login"
-    tools:context=".UserLogin">
+    tools:context=".ui.UserLogin">
 
     <RelativeLayout
         android:layout_width="wrap_content"
