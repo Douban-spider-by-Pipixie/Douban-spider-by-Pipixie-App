@@ -3,6 +3,7 @@ package cn.itcast.ppx;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -19,6 +20,8 @@ public class BaseFragment extends AppCompatActivity implements View.OnClickListe
     private RadioButton mImgCircle;
     private RadioButton mImgFriend;
     private RadioButton mImgMine;
+
+    protected Activity mActivity;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -39,6 +42,7 @@ public class BaseFragment extends AppCompatActivity implements View.OnClickListe
 
         initFragment1();
     }
+
 
     private void initFragment1(){
         //开启事务，fragment的控制是由事务来实现的

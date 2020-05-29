@@ -1,20 +1,30 @@
 package cn.itcast.ppx;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+
 public class MineFragment extends Fragment {
 
+
     private ListView mListView;
+
+    private Button mExit;
 
     public MineFragment(){
 
@@ -26,14 +36,64 @@ public class MineFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_mine, container, false);
 
         mListView=(ListView) view.findViewById(R.id.lv_list);
+        mExit=(Button)view.findViewById(R.id.btn_logout);
+        mExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout(true, new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                        startActivity(new Intent(getContext(),UserLogin.class));
+                    }
 
+                    @Override
+                    public void onError(int i, String s) {
+
+                    }
+
+                    @Override
+                    public void onProgress(int i, String s) {
+
+                    }
+                });
+            }
+        });
         MyAdapter myAdapter=new MyAdapter();
 
         mListView.setAdapter(myAdapter);
 
         setListViewHeightBasedOnChildren(mListView);
-
         return view;
+    }
+
+
+
+
+    public void logout(boolean unbindDeviceToken, final EMCallBack callback){
+        EMClient.getInstance().logout(unbindDeviceToken, new EMCallBack(){
+            @Override
+            public void onSuccess() {
+                Log.d("TAG", "logout: onSuccess");
+                if (callback != null) {
+                    callback.onSuccess();
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Log.d("TAG", "logout: onSuccess");
+                if (callback != null) {
+                    callback.onError(i, s);
+                }
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+                if (callback != null) {
+                    callback.onProgress(i, s);
+                }
+            }
+        });
     }
 
 

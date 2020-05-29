@@ -18,6 +18,7 @@
             android:background="@drawable/bg" />
 
         <Button
+            android:id="@+id/btn_editor"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:background="@drawable/shape_green"
@@ -27,6 +28,19 @@
             android:layout_toRightOf="@id/ll_mine"
             android:layout_marginLeft="100dp"
             android:text="编辑个人资料"/>
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/shape_green"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/btn_editor"
+            android:layout_toRightOf="@id/ll_mine"
+            android:layout_marginLeft="100dp"
+            android:text="退出登录"/>
 
         <LinearLayout
             android:id="@+id/ll_mine"

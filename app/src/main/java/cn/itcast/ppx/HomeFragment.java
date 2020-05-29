@@ -1,10 +1,14 @@
 package cn.itcast.ppx;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +28,9 @@ import com.lidroid.xutils.http.client.HttpRequest;
 
 import java.util.List;
 
+import cn.itcast.ppx.utils.CacheUtils;
+import cn.itcast.ppx.view.RefreshLishView;
+
 
 public class HomeFragment extends Fragment {
 
@@ -34,6 +41,8 @@ public class HomeFragment extends Fragment {
     private GridView mGridView1;
     private GridView mGridView2;
 
+    protected Activity mActivity;
+
 
     private String[] names={"登单于台","酬曹侍御","春风动春心","落叶","春夜喜雨","常恒阁"};
 
@@ -42,7 +51,12 @@ public class HomeFragment extends Fragment {
     private int[] icons={R.drawable.book1,R.drawable.book2,R.drawable.book3,R.drawable.book4,R.drawable.book5,R.drawable.book6};
 
     public HomeFragment(){
+    }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.mActivity=(Activity)context;
     }
 
     @Override
@@ -51,16 +65,33 @@ public class HomeFragment extends Fragment {
 
         View view=inflater.inflate(R.layout.fragment_home, container, false);
 
-        mGridView1=(GridView)view.findViewById(R.id.gv_list);
-        mGridView2=(GridView)view.findViewById(R.id.gv_list2);
+        mGridView1=(GridView) view.findViewById(R.id.gv_list);
+        mGridView2=(GridView) view.findViewById(R.id.gv_list2);
+
+        //CacheUtils.setCache(getContext(),"http://106.52.239.252:9988/test?p=getbook","result");
+
+        String cache=CacheUtils.getCache(getContext(),"http://106.52.239.252:9988/test?p=getbook");
+        if(!TextUtils.isEmpty(cache)){
+            System.out.println("发现缓存");
+            System.out.println(cache);
+            //有缓存
+            processData(cache);
+        }
+        //继续请求服务器数据，保存缓存最新
         getDataFromServer();
+
+        MyBaseAdapter1 myBaseAdapter1=new MyBaseAdapter1();
+        MyBaseAdapter2 myBaseAdapter2=new MyBaseAdapter2();
+
+        mGridView1.setAdapter(myBaseAdapter1);
+        mGridView2.setAdapter(myBaseAdapter2);
         return view;
     }
 
 
     private void getDataFromServer(){
         HttpUtils utils=new HttpUtils();
-        utils.send(HttpRequest.HttpMethod.GET, "http://106.52.239.252:9988/paramTest?test=randomBook",
+        utils.send(HttpRequest.HttpMethod.GET, "http://106.52.239.252:9988/test?p=getbook",
                 new RequestCallBack<String>() {
 
                     @Override
@@ -71,11 +102,9 @@ public class HomeFragment extends Fragment {
                             Toast.makeText(getContext(),"解析失败",Toast.LENGTH_SHORT).show();
                         }else{
                             processData(result);
-                            MyBaseAdapter1 myBaseAdapter1=new MyBaseAdapter1();
-                            MyBaseAdapter2 myBaseAdapter2=new MyBaseAdapter2();
-
-                            mGridView1.setAdapter(myBaseAdapter1);
-                            mGridView2.setAdapter(myBaseAdapter2);
+                            //Toast.makeText(getContext(),"解析成功",Toast.LENGTH_SHORT).show();
+                            //写缓存
+                           CacheUtils.setCache(getContext(),"http://106.52.239.252:9988/test?p=getbook",result);
                         }
 
                     }

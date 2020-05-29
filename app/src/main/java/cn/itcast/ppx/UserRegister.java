@@ -1,5 +1,6 @@
 package cn.itcast.ppx;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
@@ -13,6 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -33,6 +37,7 @@ public class UserRegister extends AppCompatActivity {
     private RelativeLayout rl_activity_register;
     private HashMap<String, String> stringHashMap;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +133,13 @@ public class UserRegister extends AppCompatActivity {
                     String result = streamToString(urlConn.getInputStream());
                     Log.e(TAG, "Get方式请求成功，result--->" + result);
                     if(result.contentEquals("true")){
+                        try{
+                            EMClient.getInstance().createAccount(et_data_uname.getText().toString().trim(),et_data_upass1.getText().toString().trim());
+                            Log.e("ppx","注册成功");
+                        }catch (HyphenateException e){
+                            e.printStackTrace();
+                            Log.e("ppx","注册失败"+e.getErrorCode()+","+e.getMessage());
+                        }
                         Looper.prepare();
                         Toast.makeText(this,"注册成功",Toast.LENGTH_LONG).show();
                         Timer time = new Timer();

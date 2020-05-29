@@ -1,5 +1,7 @@
 package cn.itcast.ppx;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +18,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -25,6 +30,7 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.itcast.ppx.im.ECApplication;
 
 public class UserLogin extends AppCompatActivity {
 
@@ -37,8 +43,13 @@ public class UserLogin extends AppCompatActivity {
     private SharedPreferences sp;
     private HashMap<String, String> stringHashMap;
 
+    @SuppressLint("ClickableViewAccessibility")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(EMClient.getInstance().isLoggedInBefore()){
+            Log.d("TAG","已经登录过");
+            startActivity(new Intent(UserLogin.this,BaseFragment.class));
+        }
         setContentView(R.layout.activity_login);
         et_data_uname = (EditText) findViewById(R.id.et_username);
         et_data_upass = (EditText) findViewById(R.id.et_password);
@@ -104,7 +115,7 @@ public class UserLogin extends AppCompatActivity {
     private void requestGet(HashMap<String, String> paramsMap) {
         try {
             if(!TextUtils.isEmpty(et_data_uname.getText().toString())&&!TextUtils.isEmpty(et_data_upass.getText().toString())){
-                String baseUrl = "http://106.52.239.252:9988/loginTest?";
+                String baseUrl = "http://106.52.239.252:9988/login?";
                 StringBuilder tempParams = new StringBuilder();
                 int pos = 0;
                 for (String key : paramsMap.keySet()) {
@@ -142,8 +153,36 @@ public class UserLogin extends AppCompatActivity {
                     String result = streamToString(urlConn.getInputStream());
                     Log.e(TAG, "Get方式请求成功，result--->" + result);
                     Looper.prepare();
-                    if(result.contains("name")){
+                    if(result.contains("Login failed!")){
+                        Toast.makeText(this,"用户名不存在，请先注册",Toast.LENGTH_LONG).show();
+                    }else{
+                        EMClient.getInstance().login(et_data_uname.getText().toString().trim(), et_data_upass.getText().toString().trim(), new EMCallBack() {
+                            @Override
+                            public void onSuccess() {
+                                Timer time = new Timer();
+                                TimerTask tk = new TimerTask() {
+                                    Intent intent = new Intent(UserLogin.this, BaseFragment.class);
+                                    @Override
+                                    public void run() {
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                };time.schedule(tk,1000);
+                                Log.e("ppx","登陆成功");
+                            }
+
+                            @Override
+                            public void onError(int i, String s) {
+                                Log.e("ppx","登陆失败"+i+","+s);
+                            }
+
+                            @Override
+                            public void onProgress(int i, String s) {
+
+                            }
+                        });
                         Toast.makeText(this,"登录成功",Toast.LENGTH_LONG).show();
+                        //CacheUtils.setCache(getApplicationContext(),"http://106.52.239.252:9988/test?p=getbook","result");
                         SharedPreferences.Editor editor=sp.edit();
                         boolean checked= cb_isSave.isChecked();
                         if(checked){
@@ -154,17 +193,6 @@ public class UserLogin extends AppCompatActivity {
                         editor.putBoolean("isChecked",checked);
                         //提交
                         editor.commit();
-                        Timer time = new Timer();
-                        TimerTask tk = new TimerTask() {
-                            Intent intent = new Intent(UserLogin.this, BaseFragment.class);
-                            @Override
-                            public void run() {
-                                startActivity(intent);
-                                finish();
-                            }
-                        };time.schedule(tk,2000);
-                    }else{
-                        Toast.makeText(this,"用户名不存在，请先注册",Toast.LENGTH_LONG).show();
                     }
                     Looper.loop();
                 }
