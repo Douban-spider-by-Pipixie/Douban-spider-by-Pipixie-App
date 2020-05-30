@@ -1,4 +1,4 @@
-package cn.itcast.ppx;
+package cn.itcast.ppx.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

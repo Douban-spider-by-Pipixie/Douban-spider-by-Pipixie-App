@@ -18,9 +18,9 @@ import com.viewpagerindicator.TabPageIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.itcast.ppx.item.ItemFragment;
-import cn.itcast.ppx.item.ItemFragment2;
-import cn.itcast.ppx.item.ItemFragment3;
+import cn.itcast.ppx.item.ItemFragmentRemen;
+import cn.itcast.ppx.item.ItemFragmentGuanzhu;
+import cn.itcast.ppx.item.ItemFragmentHuati;
 import cn.itcast.ppx.R;
 
 
@@ -49,9 +49,9 @@ public class CircleFragment extends Fragment {
         mViewPager = (ViewPager) view.findViewById(R.id.vp_circle);
         mIndicator = view.findViewById(R.id.indicator);
 
-        mFragment.add(new ItemFragment());
-        mFragment.add(new ItemFragment2());
-        mFragment.add(new ItemFragment3());
+        mFragment.add(new ItemFragmentRemen());
+        mFragment.add(new ItemFragmentGuanzhu());
+        mFragment.add(new ItemFragmentHuati());
 
         FragmentPagerAdapter adapter=new CircleAdapter(getFragmentManager(),mFragment);
 

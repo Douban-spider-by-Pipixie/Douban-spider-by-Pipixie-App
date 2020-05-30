@@ -1,6 +1,5 @@
 package cn.itcast.ppx.item;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.graphics.Color;
@@ -17,7 +16,7 @@ import android.widget.TextView;
 
 import cn.itcast.ppx.R;
 
-public class ItemFragment extends Fragment {
+public class ItemFragmentRemen extends Fragment {
 
     private GridView mGridView;
 

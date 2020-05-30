@@ -9,24 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import cn.itcast.ppx.R;
 
-public class ItemFragment3 extends Fragment {
+public class ItemFragmentGuanzhu extends Fragment {
 
     private ListView mListView;
 
-    private String[] titles={"科幻类书籍吐槽大会","情感类书籍读书会","论海明威","《心流》书友会"};
+    private String[] titles={"上海","北京","产品经理","产品经理","产品经理"};
+
+    private String[] contents={"一个月了还没找到合适的工作","今年的北京怎么了，从来没有这么难过，职位少，面试更少，石沉大海，你们呢？","在拉勾做产品时说明样子的体验？","热议|你在街道说明需求时瞬间想打人？","热议|你在街道说明需求时瞬间想打人？"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_item3, container, false);
+        View view = inflater.inflate(R.layout.fragment_item2, container, false);
 
         mListView=(ListView) view.findViewById(R.id.lv_list);
 
@@ -65,25 +66,26 @@ public class ItemFragment3 extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView=View.inflate(getContext(),R.layout.huati_list_item,null);
+                convertView=View.inflate(getContext(),R.layout.guanzhu_list_item,null);
                 holder=new ViewHolder();
                 holder.mTitle=convertView.findViewById(R.id.tv_title);
-                holder.mImageView=convertView.findViewById(R.id.iv_icon);
+                holder.mContent=convertView.findViewById(R.id.tv_content);
                 convertView.setTag(holder);
             }else {
                 holder=(ViewHolder) convertView.getTag();
             }
             holder.mTitle.setText(titles[position]);
+            holder.mContent.setText(contents[position]);
             holder.mTitle.setTextColor(Color.BLACK);
-            holder.mImageView.setBackgroundResource(R.drawable.erha);
-            holder.mTitle.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            holder.mContent.setTextColor(Color.BLACK);
+            holder.mContent.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             return convertView;
         }
     }
 
     class ViewHolder{
         TextView mTitle;
-        ImageView mImageView;
+        TextView mContent;
     }
 
     public void setListViewHeightBasedOnChildren(ListView listView) {

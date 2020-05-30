@@ -9,7 +9,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +31,7 @@ import java.util.List;
 
 import cn.itcast.ppx.domain.BooksTab;
 import cn.itcast.ppx.DetailInfo;
-import cn.itcast.ppx.JsonParse;
+import cn.itcast.ppx.utils.JsonParse;
 import cn.itcast.ppx.R;
 import cn.itcast.ppx.utils.CacheUtils;
 
@@ -75,12 +74,12 @@ public class HomeFragment extends Fragment {
 
 
         String cache=CacheUtils.getCache(getContext(),"http://106.52.239.252:9988/test?p=getbook");
-        if(!TextUtils.isEmpty(cache)){
-            System.out.println("发现缓存");
-            System.out.println(cache);
-            //有缓存
-            processData(cache);
-        }
+//        if(!TextUtils.isEmpty(cache)){
+//            System.out.println("发现缓存");
+//            System.out.println(cache);
+//            //有缓存
+//            processData(cache);
+//        }
         //继续请求服务器数据，保存缓存最新
         getDataFromServer();
 

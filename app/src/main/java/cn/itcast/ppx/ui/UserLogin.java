@@ -48,6 +48,8 @@ public class UserLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if(EMClient.getInstance().isLoggedInBefore()){
             Log.d("TAG","已经登录过");
+            EMClient.getInstance().chatManager().loadAllConversations();
+            EMClient.getInstance().groupManager().loadAllGroups();
             startActivity(new Intent(UserLogin.this, BaseFragment.class));
         }
         setContentView(R.layout.activity_login);
@@ -159,6 +161,8 @@ public class UserLogin extends AppCompatActivity {
                         EMClient.getInstance().login(et_data_uname.getText().toString().trim(), et_data_upass.getText().toString().trim(), new EMCallBack() {
                             @Override
                             public void onSuccess() {
+                                EMClient.getInstance().chatManager().loadAllConversations();
+                                EMClient.getInstance().groupManager().loadAllGroups();
                                 Timer time = new Timer();
                                 TimerTask tk = new TimerTask() {
                                     Intent intent = new Intent(UserLogin.this, BaseFragment.class);

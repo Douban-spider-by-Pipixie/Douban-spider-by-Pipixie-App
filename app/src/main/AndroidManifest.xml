@@ -32,18 +32,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ChatActivity"></activity>
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".item.ItemFragment3" />
+        <activity android:name=".item.ItemFragmentHuati" />
         <activity android:name=".ui.UserRegister" />
-        <activity android:name=".item.ItemFragment2" />
-        <activity android:name=".item.ItemFragment" />
-        <activity android:name=".DetailInfo"/>
+        <activity android:name=".item.ItemFragmentGuanzhu" />
+        <activity android:name=".item.ItemFragmentRemen" />
+        <activity android:name=".DetailInfo" />
         <activity
             android:name=".BaseFragment"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
