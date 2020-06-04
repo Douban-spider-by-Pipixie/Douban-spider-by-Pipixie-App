@@ -82,7 +82,7 @@ public class ItemFragmentRemen extends Fragment {
                 convertView=View.inflate(getContext(),R.layout.list_item_photo,null);
                 holder=new ViewHolder();
                 holder.mTexTView=convertView.findViewById(R.id.tv_title);
-                holder.mPrice=convertView.findViewById(R.id.tv_time);
+                holder.mPrice=convertView.findViewById(R.id.tv_publish);
                 holder.imageView=convertView.findViewById(R.id.iv_pic);
                 convertView.setTag(holder);
             }else {

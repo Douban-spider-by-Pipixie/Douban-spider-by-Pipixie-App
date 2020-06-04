@@ -9,34 +9,46 @@
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
+        android:id="@+id/ll_frilist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/ec_edit_chat_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="对方的username"/>
-
+            <RelativeLayout
+                android:id="@+id/rl_bottom"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bottom_bg">
                 <Button
-                    android:id="@+id/ec_btn_start_chat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="发起聊天"/>
-
-            </LinearLayout>
+                    android:id="@+id/btn_addfri"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/btn_send_selector"
+                    android:text="添加好友"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+                <EditText
+                    android:id="@+id/et_fri_id"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/btn_addfri"
+                    android:background="@drawable/send_msg_bg"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
         </RelativeLayout>
 
+        <ListView
+            android:id="@+id/lv_friList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 

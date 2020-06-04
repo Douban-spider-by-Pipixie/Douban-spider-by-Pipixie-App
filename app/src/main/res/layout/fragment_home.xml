@@ -5,6 +5,7 @@
     android:layout_height="wrap_content">
 
 <LinearLayout
+    android:id="@+id/ll_home"
      android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -31,11 +32,12 @@
                 <EditText
                     android:id="@+id/et_search"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_alignParentBottom="true"
                     android:background="@drawable/shape_white"
-                    android:textSize="30sp"
-                    android:hint="Search places" />
+                    android:singleLine="true"
+                    android:paddingLeft="10dp"
+                    android:hint="大家都在搜" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -79,7 +81,7 @@
             <GridView
                 android:id="@+id/gv_list"
                 android:layout_width="match_parent"
-                android:layout_height="420dp"
+                android:layout_height="460dp"
                 android:layout_below="@id/tv_henikouwei"
                 android:numColumns="3" />
 
@@ -138,7 +140,7 @@
                 android:layout_below="@id/tv_content"
                 android:layout_toRightOf="@id/iv_pic"
                 android:paddingLeft="10dp"
-                android:text="28分16秒" />
+                android:text="今日力荐" />
 
             <Button
                 android:id="@+id/btn_knowmore"

@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants"
     android:padding="6dp">
     <ImageView
         android:id="@+id/iv_head"
@@ -15,25 +14,11 @@
         android:background="@drawable/pxj"
         android:focusable="false" />
     <TextView
-        android:id="@+id/tv_userid"
+        android:id="@+id/tv_chat_content"
         style="@style/chat_content_style"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:text="userId"
-        android:textSize="20sp"
-        android:background="@drawable/shape_green"
+        android:background="@drawable/chat_left_selector"
         android:layout_toRightOf="@id/iv_head" />
-
-    <Button
-        android:id="@+id/btn_delete"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        style="@style/chat_content_style"
-        android:text="   删除好友"
-        android:focusable="false"
-        android:textStyle="bold"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/shape_green"
-        />
 </RelativeLayout>

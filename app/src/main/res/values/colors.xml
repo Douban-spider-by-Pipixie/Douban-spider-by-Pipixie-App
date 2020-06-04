@@ -7,5 +7,6 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="color_minefragment_top">#20B2AA</color>
+    <color name="btn_send_bg_normal">#b9f2fd</color>
 
 </resources>

@@ -20,14 +20,16 @@
             android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="   请输入用户名"
+            android:hint="请输入用户名"
+            android:paddingLeft="10dp"
             android:gravity="center_vertical"
             android:background="#FFFFFF"/>
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="   请输入密码"
+            android:hint="请输入密码"
+            android:paddingLeft="10dp"
             android:gravity="center_vertical"
             android:inputType="textPassword"
             android:layout_marginTop="20dp"

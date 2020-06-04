@@ -70,7 +70,6 @@ public class DetailInfo extends AppCompatActivity {
 
         String author=getIntent().getStringExtra("Book_Author");
         String name=getIntent().getStringExtra("Book_Name");
-        String id=getIntent().getStringExtra("Book_Id");
         String date=getIntent().getStringExtra("Book_Date");
         String price=getIntent().getStringExtra("Book_Price");
         String img=getIntent().getStringExtra("Book_Img");
@@ -92,28 +91,29 @@ public class DetailInfo extends AppCompatActivity {
 
     private void getDataFromServer(){
         HttpUtils utils=new HttpUtils();
-        utils.send(HttpRequest.HttpMethod.GET, "http://106.52.239.252:9988/test?p=detail&id=34879976",
-                new RequestCallBack<String>() {
-                    @Override
-                    public void onSuccess(ResponseInfo<String> responseInfo) {
-                        String result=responseInfo.result;
-                        System.out.println("服务器数据:"+result);
-                        if(result==null){
-                            Toast.makeText(getApplicationContext(),"解析失败",Toast.LENGTH_SHORT).show();
-                        }else {
-                            processData(result);
+        String id=getIntent().getStringExtra("Book_Id");
 
-                            mAuthorIntroduction.setText(mBooksDetailTab.getAuthorIntroduction());
-                            mBookIntroduction.setText(mBooksDetailTab.getBookIntroduction());
-                            mCatalogue.setText(mBooksDetailTab.getTable());
+            utils.send(HttpRequest.HttpMethod.GET, "http://106.52.239.252:9988/test?p=detail&id=" + id,
+                    new RequestCallBack<String>() {
+                        @Override
+                        public void onSuccess(ResponseInfo<String> responseInfo) {
+                            String result = responseInfo.result;
+                            System.out.println("服务器数据:" + result);
+                            if (result.equals("null")) {
+                                Toast.makeText(getApplicationContext(), "数据暂时为空哦", Toast.LENGTH_SHORT).show();
+                            } else {
+                                processData(result);
+                                mAuthorIntroduction.setText(mBooksDetailTab.getAuthorIntroduction());
+                                mBookIntroduction.setText(mBooksDetailTab.getBookIntroduction());
+                                mCatalogue.setText(mBooksDetailTab.getTable());
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(HttpException e, String s) {
+                        @Override
+                        public void onFailure(HttpException e, String s) {
 
-                    }
-                });
+                        }
+                    });
     }
 
     private void processData(String json) {
