@@ -156,7 +156,7 @@ public class UserLogin extends AppCompatActivity {
                     Log.e(TAG, "Get方式请求成功，result--->" + result);
                     Looper.prepare();
                     if(result.contains("Login failed!")){
-                        Toast.makeText(this,"用户名不存在，请先注册",Toast.LENGTH_LONG).show();
+                        Toast.makeText(this,"密码错误或账号不存在",Toast.LENGTH_LONG).show();
                     }else{
                         EMClient.getInstance().login(et_data_uname.getText().toString().trim(), et_data_upass.getText().toString().trim(), new EMCallBack() {
                             @Override
