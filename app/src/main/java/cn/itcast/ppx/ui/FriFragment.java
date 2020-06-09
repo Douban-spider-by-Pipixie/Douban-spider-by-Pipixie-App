@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,16 +50,15 @@ public class FriFragment extends Fragment {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == COMPLETED) {
-
+                //new Thread(networkTask).start();
                 friBeanList = new ArrayList<FriListBean>();
-
-                //for(String s:usernames){
-                    //FriListBean friListBean = new FriListBean();
-                    //System.out.println("userid:"+s);
-
-                    //friBeanList.add(friListBean);
-                //}
-                // FrilistAdapter adapter=new FrilistAdapter();
+                ChatBean chatBean = new ChatBean();
+                for(String s:usernames){
+                    FriListBean friListBean = new FriListBean();
+                    System.out.println("userid:"+s);
+                    friListBean.setUserId(s);
+                    friBeanList.add(friListBean);
+                }
                 adpter = new FrilistAdapter(friBeanList, getContext());
                 mListView.setAdapter(adpter);
                 mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -167,6 +167,7 @@ public class FriFragment extends Fragment {
             }
         }
     };
+
     public FriFragment(){
 
     }
@@ -209,27 +210,54 @@ public class FriFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-//                try {
-//                    usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
-//
-//                } catch (HyphenateException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
                 Message msg = new Message();
                 msg.what = COMPLETED;
                 handler.sendMessage(msg);
             }
         }).start();
-
-
         return view;
     }
+
+    Runnable networkTask = new Runnable() {
+        @Override
+        public void run() {
+            // TODO
+            // 在这里进行 http request.网络请求相关操作
+            try {
+                usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
+            } catch (HyphenateException e) {
+                e.printStackTrace();
+            }
+
+            Message msg = new Message();
+            Bundle data = new Bundle();
+            data.putString("value", "请求结果");
+            msg.setData(data);
+            handler2.sendMessage(msg);
+        }
+    };
+
+    @SuppressLint("HandlerLeak")
+    Handler handler2 = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            String val = data.getString("value");
+            Log.i("mylog", "请求结果为-->" + val);
+            // TODO
+            // UI界面的更新等相关操作
+        }
+    };
 
     private void AddFri(String toAddUsername) throws HyphenateException {
         String reason="nice to meet you!";
         EMClient.getInstance().contactManager().addContact(toAddUsername, reason);
     }
-
-
 
 }

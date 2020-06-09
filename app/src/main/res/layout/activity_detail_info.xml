@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/sv_detail"
     android:orientation="vertical"
     tools:context=".DetailInfo">
 
@@ -150,6 +151,28 @@
             android:layout_below="@id/tv_mulu"
             android:textSize="16sp"
             android:text="中译本序言（刘擎）\n 导 论 人人都是民粹主义者吗？\n 第一章 民粹主义者的话语\n 第二章 民粹主义者的行为或掌权的民粹主义者\n 第三章 如何对待民粹主义者\n 结 论 七论民粹主义\n 注 释\n 致 谢\n \n"/>
+
+        <View
+            android:id="@+id/view"
+            android:layout_below="@id/tv_table"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#A9A9A9"/>
+
+        <TextView
+            android:id="@+id/tv_comment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view"
+            android:text="评论"
+            android:textSize="25sp"
+            android:textColor="#000"/>
+
+        <cn.itcast.ppx.view.ListViewForScrollView
+            android:id="@+id/lv_comment_list"
+            android:layout_below="@id/tv_comment_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 

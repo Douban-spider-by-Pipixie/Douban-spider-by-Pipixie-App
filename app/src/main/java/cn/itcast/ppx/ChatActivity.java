@@ -297,8 +297,4 @@ public class ChatActivity extends AppCompatActivity implements EMMessageListener
     @Override
     public void onMessageChanged(EMMessage message, Object object) {
     }
-
-
-
-
 }

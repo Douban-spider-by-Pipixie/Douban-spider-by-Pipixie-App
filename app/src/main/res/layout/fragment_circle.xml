@@ -15,11 +15,7 @@
         android:layout_height="30dp"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/ib_search"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/search" />
+
 
         <EditText
             android:id="@+id/et_search"
@@ -29,6 +25,7 @@
             android:layout_toRightOf="@id/ib_search"
             android:background="@color/white"
             android:textSize="20sp"
+            android:paddingLeft="10dp"
             android:hint="大家都在搜" />
 
 

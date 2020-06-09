@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        String cache=CacheUtils.getCache(getContext(),"http://106.52.239.252:9988/test?p=getbook");
+        String cache=CacheUtils.getCache(getContext(),"http://106.52.239.252:9988/test?p=getbook&n=9");
 //        if(!TextUtils.isEmpty(cache)){
 //            System.out.println("发现缓存");
 //            System.out.println(cache);
@@ -111,7 +111,12 @@ public class HomeFragment extends Fragment {
 //            processData(cache);
 //        }
         //继续请求服务器数据，保存缓存最新
-        getDataFromServer();
+       getActivity().runOnUiThread(new Runnable() {
+           @Override
+           public void run() {
+               getDataFromServer();
+           }
+       });
 
         return view;
     }
@@ -119,7 +124,7 @@ public class HomeFragment extends Fragment {
 
     private void getDataFromServer(){
         HttpUtils utils_getbook=new HttpUtils();
-        utils_getbook.send(HttpRequest.HttpMethod.GET, "http://106.52.239.252:9988/test?p=getbook",
+        utils_getbook.send(HttpRequest.HttpMethod.GET, "http://106.52.239.252:9988/test?p=getbook&n=16",
                 new RequestCallBack<String>() {
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -136,16 +141,16 @@ public class HomeFragment extends Fragment {
                             mGridView1.setAdapter(myBaseAdapter1);
                             mGridView2.setAdapter(myBaseAdapter2);
 
-                            mTitle.setText(mBooksTabs.get(3).getName());
+                            mTitle.setText(mBooksTabs.get(15).getName());
                             mBitmapUtils=new BitmapUtils(getContext());
-                            String topimage=mBooksTabs.get(3).getImg();//图片的下载链接
+                            String topimage=mBooksTabs.get(15).getImg();//图片的下载链接
                             mIcon.setScaleType(ImageView.ScaleType.FIT_XY);//设置缩放模式，图片宽高匹配
                             mBitmapUtils.display(mIcon,topimage);
                             mIcon.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent=new Intent(getContext(), DetailInfo.class);
-                                    BooksTab booksTab=mBooksTabs.get(3);
+                                    BooksTab booksTab=mBooksTabs.get(15);
                                     intent.putExtra("Book_Id",booksTab.getId().trim());
                                     intent.putExtra("Book_Author",booksTab.getAuthor());
                                     intent.putExtra("Book_Date",booksTab.getDate());
@@ -264,7 +269,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 6;
+            return 9;
         }
 
         @Override
@@ -274,7 +279,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         public long getItemId(int position) {
-            return position;
+            return position+6;
         }
 
         @Override
@@ -289,7 +294,7 @@ public class HomeFragment extends Fragment {
                 holder.mPublish = convertView.findViewById(R.id.tv_publish);
                 holder.mStar = convertView.findViewById(R.id.tv_star);
                 holder.imageView = convertView.findViewById(R.id.iv_pic);
-                mBooksTab = mBooksTabs.get(position);
+                mBooksTab = mBooksTabs.get(position+6);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();

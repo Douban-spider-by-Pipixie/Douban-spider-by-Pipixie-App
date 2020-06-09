@@ -243,6 +243,4 @@ public class UserLogin extends AppCompatActivity {
             return null;
         }
     }
-
-
 }

@@ -2,12 +2,16 @@ package cn.itcast.ppx;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +23,11 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
-import cn.itcast.ppx.domain.BooksDetailTab;
-import cn.itcast.ppx.ui.HomeFragment;
-import cn.itcast.ppx.utils.CacheUtils;
+import java.util.List;
 
+import cn.itcast.ppx.domain.BooksDetailTab;
+import cn.itcast.ppx.domain.CommentsTab;
+import cn.itcast.ppx.utils.JsonParse;
 
 public class DetailInfo extends AppCompatActivity {
 
@@ -35,6 +40,11 @@ public class DetailInfo extends AppCompatActivity {
     private TextView mBookIntroduction;
     private TextView mAuthorIntroduction;
     private TextView mCatalogue;
+    private ListView mlistview;
+    private ScrollView sv;
+
+    private List<CommentsTab> mCommentsTabs;
+    private CommentsTab mCommentsTab;
 
     private BitmapUtils mBitmapUtils;
 
@@ -54,6 +64,9 @@ public class DetailInfo extends AppCompatActivity {
         mBookIntroduction=(TextView)findViewById(R.id.tv_authorIntroduction);
         mAuthorIntroduction=(TextView)findViewById(R.id.tv_bookIntroduction);
         mCatalogue=(TextView)findViewById(R.id.tv_table);
+        mlistview=(ListView)findViewById(R.id.lv_comment_list);
+        sv=(ScrollView)findViewById(R.id.sv_detail);
+        sv.smoothScrollTo(0, 0);
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,12 +97,13 @@ public class DetailInfo extends AppCompatActivity {
         mImg.setScaleType(ImageView.ScaleType.FIT_XY);//设置缩放模式，图片宽高匹配
         mBitmapUtils.display(mImg,topimage);
 
-        getDataFromServer();
+        getDetailFromServer();
+        getCommentFromServer();
 
     }
 
 
-    private void getDataFromServer(){
+    private void getDetailFromServer(){
         HttpUtils utils=new HttpUtils();
         String id=getIntent().getStringExtra("Book_Id");
 
@@ -100,9 +114,9 @@ public class DetailInfo extends AppCompatActivity {
                             String result = responseInfo.result;
                             System.out.println("服务器数据:" + result);
                             if (result.equals("null")) {
-                                Toast.makeText(getApplicationContext(), "数据暂时为空哦", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "介绍数据暂时为空哦", Toast.LENGTH_SHORT).show();
                             } else {
-                                processData(result);
+                                processDetailData(result);
                                 mAuthorIntroduction.setText(mBooksDetailTab.getAuthorIntroduction());
                                 mBookIntroduction.setText(mBooksDetailTab.getBookIntroduction());
                                 mCatalogue.setText(mBooksDetailTab.getTable());
@@ -116,10 +130,98 @@ public class DetailInfo extends AppCompatActivity {
                     });
     }
 
-    private void processData(String json) {
+    private void getCommentFromServer(){
+        HttpUtils utils=new HttpUtils();
+        String id=getIntent().getStringExtra("Book_Id");
+
+        utils.send(HttpRequest.HttpMethod.GET, "http://106.52.239.252:9988/test?p=comment&id=1000019" ,
+                new RequestCallBack<String>() {
+                    @Override
+                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                        String result = responseInfo.result;
+                        System.out.println("服务器数据:" + result);
+                        if (result.equals("null")) {
+                            Toast.makeText(getApplicationContext(), "评论数据暂时为空哦", Toast.LENGTH_SHORT).show();
+                        } else {
+                            processCommentData(result);
+                            MyCommentAdapter adapter=new MyCommentAdapter(getBaseContext());
+                            mlistview.setAdapter(adapter);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(HttpException e, String s) {
+
+                    }
+                });
+    }
+
+    private void processDetailData(String json) {
         Gson gson=new Gson();
         mBooksDetailTab=gson.fromJson(json,BooksDetailTab.class);
         System.out.println("详情页解析的结果："+mBooksDetailTab);
+    }
+
+    protected void processCommentData(String json){
+        mCommentsTabs= JsonParse.getCommentsTab(json);
+        System.out.println("评论解析的结果："+mCommentsTabs);
+    }
+
+    class MyCommentAdapter extends BaseAdapter {
+
+        private Context context;
+
+        public MyCommentAdapter(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public int getCount() {
+            return mCommentsTabs.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            ViewHolder holder;
+
+            if (convertView == null) {
+                convertView=View.inflate(context,R.layout.comment_list_item,null);
+                holder=new ViewHolder();
+                holder.mUsername=convertView.findViewById(R.id.tv_title);
+                holder.mComment=convertView.findViewById(R.id.tv_comment);
+                holder.mStart=convertView.findViewById(R.id.tv_start);
+                holder.mDate=convertView.findViewById(R.id.tv_date);
+                holder.mUseful=convertView.findViewById(R.id.tv_useful);
+                mCommentsTab=mCommentsTabs.get(position);
+                convertView.setTag(holder);
+            }else {
+                holder=(ViewHolder) convertView.getTag();
+            }
+            holder.mUsername.setText(mCommentsTab.getUser());
+            holder.mStart.setText(mCommentsTab.getStart());
+            holder.mDate.setText(mCommentsTab.getDate());
+            holder.mUseful.setText(mCommentsTab.getUseful());
+            holder.mComment.setText(mCommentsTab.getComment());
+            return convertView;
+        }
+        class ViewHolder{
+            TextView mUsername;
+            TextView mComment;
+            TextView mStart;
+            TextView mDate;
+            TextView mUseful;
+        }
     }
 
 }
