@@ -40,6 +40,7 @@ public class FriFragment extends Fragment {
     private EditText mAdduserId;
     private Button mAddfribtn;
     private FrilistAdapter adpter;
+    private Button mFindfribtn;
 
     private List<String> usernames;
 
@@ -183,6 +184,7 @@ public class FriFragment extends Fragment {
 
         mAdduserId=(EditText)view.findViewById(R.id.et_fri_id);
         mAddfribtn=(Button)view.findViewById(R.id.btn_addfri);
+        mFindfribtn=(Button)view.findViewById(R.id.btn_findfri);
         mListView=(ListView)view.findViewById(R.id.lv_friList);
 
         mAddfribtn.setOnClickListener(new View.OnClickListener() {
@@ -204,6 +206,15 @@ public class FriFragment extends Fragment {
                 }else{
                     Toast.makeText(getContext(), "ID不能为空", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        mFindfribtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ChatActivity.class);
+                intent.putExtra("ec_chat_id", "panxiongjian");
+                startActivity(intent);
             }
         });
 

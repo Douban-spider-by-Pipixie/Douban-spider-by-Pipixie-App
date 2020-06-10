@@ -24,11 +24,22 @@
                     android:id="@+id/btn_addfri"
                     android:layout_width="80dp"
                     android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_toLeftOf="@id/btn_findfri"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/btn_send_selector"
                     android:text="添加好友"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+                <Button
+                    android:id="@+id/btn_findfri"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/btn_send_selector"
+                    android:text="好友匹配"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
                 <EditText
